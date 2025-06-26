@@ -3,16 +3,33 @@
   "colors": {},
   "tokenColors": [
     { "scope": "keyword.satzart.a00", "settings": { "foreground": "#9cdcfe" } },
+    { "scope": "keyword.satzart.a10", "settings": { "foreground": "#40bfff" } },
+
     { "scope": "keyword.satzart.b00", "settings": { "foreground": "#dcdcaa" } },
+    { "scope": "keyword.satzart.b10", "settings": { "foreground": "#e7e798" } },
+
     { "scope": "keyword.satzart.c00", "settings": { "foreground": "#ce9178" } },
+
     { "scope": "keyword.satzart.d00", "settings": { "foreground": "#4ec9b0" } },
+    { "scope": "keyword.satzart.d10", "settings": { "foreground": "#6ee6cf" } },
+
     { "scope": "keyword.satzart.e00", "settings": { "foreground": "#c586c0" } },
+    { "scope": "keyword.satzart.e10", "settings": { "foreground": "#e2b3e8" } },
+
     { "scope": "keyword.satzart.f00", "settings": { "foreground": "#d16969" } },
+
     { "scope": "keyword.satzart.g00", "settings": { "foreground": "#b5cea8" } },
+
     { "scope": "keyword.satzart.h00", "settings": { "foreground": "#569cd6" } },
+    { "scope": "keyword.satzart.h10", "settings": { "foreground": "#7ba7ea" } },
+
     { "scope": "keyword.satzart.i00", "settings": { "foreground": "#c8c8c8" } },
+
     { "scope": "keyword.satzart.j00", "settings": { "foreground": "#ffc66d" } },
+
     { "scope": "keyword.satzart.z00", "settings": { "foreground": "#ff9da4" } },
+
     { "scope": "meta.header.fortras", "settings": { "foreground": "#ffcb6b", "fontStyle": "bold" } }
   ]
 }
+
