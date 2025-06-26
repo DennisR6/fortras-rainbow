@@ -3,7 +3,6 @@ const vscode = require('vscode');
 function activate(context) {
   const decorations = {};
 
-  // Farben für jede spezifische Satzart (anpassbar!)
   const farbTabelle = {
     A00: '#9cdcfe',
     A10: '#40bfff',
@@ -23,7 +22,6 @@ function activate(context) {
     Z00: '#ff9da4'
   };
 
-  // Erzeuge für jede Satzart eine passende Decoration
   for (const [satzart, farbe] of Object.entries(farbTabelle)) {
     decorations[satzart] = vscode.window.createTextEditorDecorationType({
       color: farbe
@@ -34,7 +32,6 @@ function activate(context) {
     if (!editor) return;
     const text = editor.document.getText();
     const rangesBySatzart = {};
-
     for (const satzart of Object.keys(farbTabelle)) {
       rangesBySatzart[satzart] = [];
     }
@@ -55,21 +52,23 @@ function activate(context) {
     }
   }
 
-  vscode.window.onDidChangeActiveTextEditor(editor => {
-    if (editor) updateDecorations(editor);
-  });
-
-  vscode.workspace.onDidChangeTextDocument(event => {
-    const editor = vscode.window.activeTextEditor;
-    if (editor && event.document === editor.document) updateDecorations(editor);
-  });
-
-  vscode.workspace.onDidOpenTextDocument(doc => {
-    if (['.ftr', '.bord', '.stat', '.entl'].some(ext => doc.fileName.endsWith(ext))) {
-      const editor = vscode.window.visibleTextEditors.find(e => e.document === doc);
+  context.subscriptions.push(
+    vscode.window.onDidChangeActiveTextEditor(editor => {
       if (editor) updateDecorations(editor);
-    }
-  });
+    }),
+
+    vscode.workspace.onDidChangeTextDocument(event => {
+      const editor = vscode.window.activeTextEditor;
+      if (editor && event.document === editor.document) updateDecorations(editor);
+    }),
+
+    vscode.workspace.onDidOpenTextDocument(doc => {
+      if (['.ftr', '.bord', '.stat', '.entl'].some(ext => doc.fileName.endsWith(ext))) {
+        const editor = vscode.window.visibleTextEditors.find(e => e.document === doc);
+        if (editor) updateDecorations(editor);
+      }
+    })
+  );
 
   if (vscode.window.activeTextEditor) {
     updateDecorations(vscode.window.activeTextEditor);
@@ -77,3 +76,4 @@ function activate(context) {
 }
 
 exports.activate = activate;
+
