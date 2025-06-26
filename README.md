@@ -2,8 +2,7 @@
 
 Ein leichtgewichtiges Visual Studio Code-Plugin zur farblichen Hervorhebung von FORTRAS 100 Datensätzen (Release 100), insbesondere im Format **BORD512**, **STAT512** und **ENTL512**.
 
-![FORTRAS Highlighting Beispiel]
-(./screenshot.png)
+![FORTRAS Highlighting Beispiel](./screenshot.png)
 
 ---
 
