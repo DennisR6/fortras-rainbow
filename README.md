@@ -16,7 +16,7 @@ Ein leichtgewichtiges Visual Studio Code-Plugin zur farblichen Hervorhebung von 
 
 - ## 🧩 Installation
 
-1. [VSIX-Datei herunterladen](https://github.com/DennisR6/fortras-rainbow/releases/Version 1.0.0)
+1. [VSIX-Datei herunterladen](https://github.com/DennisR6/fortras-rainbow/tree/main/releases/Version%201.0.0))
 2. Im Terminal:
 
 ```bash
