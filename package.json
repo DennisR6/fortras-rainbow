@@ -31,6 +31,13 @@
         "path": "./themes/fortras-color-theme.json"
       }
     ]
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DennisR6/fortras-rainbow"
+  },
+  "bugs": {
+    "url": "https://github.com/DennisR6/fortras-rainbow/issues"
+  },
+  "homepage": "https://github.com/DennisR6/fortras-rainbow#readme"
 }
-
