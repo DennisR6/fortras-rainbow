@@ -1,0 +1,18 @@
+{
+  "name": "FORTRAS Theme",
+  "colors": {},
+  "tokenColors": [
+    { "scope": "keyword.satzart.a00", "settings": { "foreground": "#9cdcfe" } },
+    { "scope": "keyword.satzart.b00", "settings": { "foreground": "#dcdcaa" } },
+    { "scope": "keyword.satzart.c00", "settings": { "foreground": "#ce9178" } },
+    { "scope": "keyword.satzart.d00", "settings": { "foreground": "#4ec9b0" } },
+    { "scope": "keyword.satzart.e00", "settings": { "foreground": "#c586c0" } },
+    { "scope": "keyword.satzart.f00", "settings": { "foreground": "#d16969" } },
+    { "scope": "keyword.satzart.g00", "settings": { "foreground": "#b5cea8" } },
+    { "scope": "keyword.satzart.h00", "settings": { "foreground": "#569cd6" } },
+    { "scope": "keyword.satzart.i00", "settings": { "foreground": "#c8c8c8" } },
+    { "scope": "keyword.satzart.j00", "settings": { "foreground": "#ffc66d" } },
+    { "scope": "keyword.satzart.z00", "settings": { "foreground": "#ff9da4" } },
+    { "scope": "meta.header.fortras", "settings": { "foreground": "#ffcb6b", "fontStyle": "bold" } }
+  ]
+}

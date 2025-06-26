@@ -1,0 +1,36 @@
+{
+  "name": "fortras-syntax",
+  "displayName": "FORTRAS 100 Syntax Highlighting",
+  "description": "Syntax-Highlighting für BORD512, STAT512, ENTL512 nach FORTRAS Release 100",
+  "version": "1.0.0",
+  "publisher": "dzimm",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": ["Programming Languages"],
+  "contributes": {
+    "languages": [
+      {
+        "id": "fortras",
+        "aliases": ["FORTRAS", "fortras"],
+        "extensions": [".ftr", ".bord", ".stat", ".entl"],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "fortras",
+        "scopeName": "source.fortras",
+        "path": "./syntaxes/fortras.tmLanguage.json"
+      }
+    ],
+    "themes": [
+      {
+        "label": "FORTRAS Theme",
+        "uiTheme": "vs-dark",
+        "path": "./themes/fortras-color-theme.json"
+      }
+    ]
+  }
+}
+
