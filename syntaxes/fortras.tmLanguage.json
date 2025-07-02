@@ -1,7 +1,7 @@
 {
   "name": "FORTRAS 100",
   "scopeName": "source.fortras",
-  "fileTypes": ["ftr", "bord", "stat", "entl"],
+  "firstLineMatch": "^@@PH(BORD\\d*|STAT\\d*|ENTL\\d*)",
   "patterns": [
     { "name": "keyword.satzart.a00", "match": "^A00" },
     { "name": "keyword.satzart.a10", "match": "^A10" },
@@ -19,8 +19,13 @@
     { "name": "keyword.satzart.i00", "match": "^I00" },
     { "name": "keyword.satzart.j00", "match": "^J00" },
     { "name": "keyword.satzart.z00", "match": "^Z00" },
-    { "name": "meta.header.fortras", "match": "^@@PH(BORD|STAT|ENTL)512\\d{0,4}" },
+    { "name": "keyword.satzart.m00", "match": "^M00" },
+    { "name": "keyword.satzart.n00", "match": "^N00" },
+    { "name": "keyword.satzart.q00", "match": "^Q00" },
+    { "name": "keyword.satzart.q10", "match": "^Q10" },
+    { "name": "meta.header.fortras", "match": "^@@PH(BORD\\d*|STAT\\d*|ENTL\\d*)" },
     { "name": "constant.numeric.feldnummer", "match": "\\d{5,10}" },
-    { "name": "string.quoted.inhalt", "match": "[A-ZÄÖÜa-zäöüß0-9\\s\\/\\,\\.\\-]{15,}" }
+    { "name": "string.quoted.inhalt", "match": "[A-ZÄÖÜa-zäöüß0-9\\s\\/,\\.\\-]{15,}" }
   ]
 }
+

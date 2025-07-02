@@ -19,7 +19,11 @@ function activate(context) {
     H10: '#7ba7ea',
     I00: '#c8c8c8',
     J00: '#ffc66d',
-    Z00: '#ff9da4'
+    Z00: '#ff9da4',
+    M00: '#ffa07a',
+    N00: '#a9a9f5',
+    Q00: '#98fb98',
+    Q10: '#c0fccc'
   };
 
   for (const [satzart, farbe] of Object.entries(farbTabelle)) {
@@ -28,28 +32,37 @@ function activate(context) {
     });
   }
 
+  function erkenneSatzartAusHeader(text) {
+    const ersteZeile = text.split(/\r?\n/)[0];
+    const match = ersteZeile.match(/(BORD\d*|STAT|[A-Z]{1}\d{2})/i);
+    if (!match) return null;
+
+    const header = match[1].toUpperCase();
+
+    if (header.startsWith('BORD')) return 'B00';
+    if (header.startsWith('STAT')) return 'A00';
+    if (farbTabelle[header]) return header;
+
+    return null;
+  }
+
   function updateDecorations(editor) {
     if (!editor) return;
     const text = editor.document.getText();
-    const rangesBySatzart = {};
-    for (const satzart of Object.keys(farbTabelle)) {
-      rangesBySatzart[satzart] = [];
-    }
 
+    const erkannteSatzart = erkenneSatzartAusHeader(text);
+    if (!erkannteSatzart || !farbTabelle[erkannteSatzart]) return;
+
+    const ranges = [];
     const zeilen = text.split(/\r?\n/);
     zeilen.forEach((zeile, i) => {
       const match = zeile.match(/^([A-Z]{1}\d{2})/);
-      if (match) {
-        const satzart = match[1];
-        if (rangesBySatzart[satzart]) {
-          rangesBySatzart[satzart].push(new vscode.Range(i, 0, i, 3));
-        }
+      if (match && match[1] === erkannteSatzart) {
+        ranges.push(new vscode.Range(i, 0, i, 3));
       }
     });
 
-    for (const [satzart, ranges] of Object.entries(rangesBySatzart)) {
-      editor.setDecorations(decorations[satzart], ranges);
-    }
+    editor.setDecorations(decorations[erkannteSatzart], ranges);
   }
 
   context.subscriptions.push(
@@ -63,10 +76,8 @@ function activate(context) {
     }),
 
     vscode.workspace.onDidOpenTextDocument(doc => {
-      if (['.ftr', '.bord', '.stat', '.entl'].some(ext => doc.fileName.endsWith(ext))) {
-        const editor = vscode.window.visibleTextEditors.find(e => e.document === doc);
-        if (editor) updateDecorations(editor);
-      }
+      const editor = vscode.window.visibleTextEditors.find(e => e.document === doc);
+      if (editor) updateDecorations(editor);
     })
   );
 
@@ -76,4 +87,3 @@ function activate(context) {
 }
 
 exports.activate = activate;
-

@@ -29,7 +29,11 @@
 
     { "scope": "keyword.satzart.z00", "settings": { "foreground": "#ff9da4" } },
 
+    { "scope": "keyword.satzart.m00", "settings": { "foreground": "#ffa07a" } },
+    { "scope": "keyword.satzart.n00", "settings": { "foreground": "#a9a9f5" } },
+    { "scope": "keyword.satzart.q00", "settings": { "foreground": "#98fb98" } },
+    { "scope": "keyword.satzart.q10", "settings": { "foreground": "#c0fccc" } },
+
     { "scope": "meta.header.fortras", "settings": { "foreground": "#ffcb6b", "fontStyle": "bold" } }
   ]
 }
-
