@@ -32,37 +32,38 @@ function activate(context) {
     });
   }
 
-  function erkenneSatzartAusHeader(text) {
-    const ersteZeile = text.split(/\r?\n/)[0];
-    const match = ersteZeile.match(/(BORD\d*|STAT|[A-Z]{1}\d{2})/i);
-    if (!match) return null;
-
-    const header = match[1].toUpperCase();
-
-    if (header.startsWith('BORD')) return 'B00';
-    if (header.startsWith('STAT')) return 'A00';
-    if (farbTabelle[header]) return header;
-
-    return null;
+  function istFortrasDatei(text) {
+    const header = text.split(/\r?\n/)[0];
+    return /@@PH(STAT|BORD|ENTL)\d*/.test(header.toUpperCase());
   }
 
   function updateDecorations(editor) {
     if (!editor) return;
     const text = editor.document.getText();
 
-    const erkannteSatzart = erkenneSatzartAusHeader(text);
-    if (!erkannteSatzart || !farbTabelle[erkannteSatzart]) return;
+    // Prüfen, ob es eine FORTRAS-Datei ist
+    if (!istFortrasDatei(text)) return;
 
-    const ranges = [];
     const zeilen = text.split(/\r?\n/);
+    const rangesBySatzart = {};
+
+    for (const satzart of Object.keys(farbTabelle)) {
+      rangesBySatzart[satzart] = [];
+    }
+
     zeilen.forEach((zeile, i) => {
       const match = zeile.match(/^([A-Z]{1}\d{2})/);
-      if (match && match[1] === erkannteSatzart) {
-        ranges.push(new vscode.Range(i, 0, i, 3));
+      if (match) {
+        const satzart = match[1];
+        if (rangesBySatzart[satzart]) {
+          rangesBySatzart[satzart].push(new vscode.Range(i, 0, i, 3));
+        }
       }
     });
 
-    editor.setDecorations(decorations[erkannteSatzart], ranges);
+    for (const [satzart, ranges] of Object.entries(rangesBySatzart)) {
+      editor.setDecorations(decorations[satzart], ranges);
+    }
   }
 
   context.subscriptions.push(
@@ -72,7 +73,9 @@ function activate(context) {
 
     vscode.workspace.onDidChangeTextDocument(event => {
       const editor = vscode.window.activeTextEditor;
-      if (editor && event.document === editor.document) updateDecorations(editor);
+      if (editor && event.document === editor.document) {
+        updateDecorations(editor);
+      }
     }),
 
     vscode.workspace.onDidOpenTextDocument(doc => {
